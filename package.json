@@ -1,0 +1,22 @@
+{
+  "name": "merifighters",
+  "version": "0.0.1",
+  "description": "Un juego en html5/js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "juego",
+    "2d",
+    "game",
+    "fight",
+    "game"
+  ],
+  "author": "Fran Chale",
+  "license": "MIT",
+  "devDependencies": {
+    "craftyjs": "^0.8.0"
+  }
+}
