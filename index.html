@@ -1,21 +1,27 @@
 <html>
 
-<head></head> 
+<head></head>
 
 <body>
     <div id="game"></div>
     <script type="text/javascript" src="node_modules/craftyjs/dist/crafty-min.js"></script>
     <script type="text/javascript" src="src/app/models/Scenary.js">
-        
     </script>
     <script>
-        let game = new Scenary({posX:0,posY:0,width:768,height:220,context:"", background:""})//Crafty.init(768, 256, document.getElementById('game'));
+        let game = new Scenary({
+            posX: 0,
+            posY: 0,
+            width: 768,
+            height: 220,
+            context: "",
+            background: ""
+        }) //Crafty.init(768, 256, document.getElementById('game'));
         game.start();
         Crafty.e('Floor, 2D, Canvas')
             .attr({
                 x: 0,
-                y: 220,
-                w: 768, 
+                y: 210,
+                w: 768,
                 h: 10
             });
         /*let limits = {
@@ -43,6 +49,12 @@
             h: 220
         });*/
         Crafty.background('#FFFFFF url(src/assets/img/scenary.gif) no-repeat ');
+        let heal = Crafty.e('Heal,2D, Canvas, Color').attr({
+            x: 10,
+            y: 10,
+            w: 100,
+            h: 10
+        }).color('linear-gradient(to right, rgba(30,87,153,1) 0%,rgba(30,87,153,1) 99%,rgba(30,87,153,1) 99%,rgba(0,0,0,1) 100%)');
         let square = Crafty.e('Player, 2D, DOM, Color, Twoway, Gravity, Collision')
             .attr({
                 x: 100,
@@ -55,7 +67,9 @@
             .gravity('Floor')
             .collision()
             .bind('Moved', function (from) {
-                console.log('move');
+                console.log(Crafty.timer.FPS());
+                heal.x = this.x - this.w/2;
+                heal.y = this.y - this.h + 30;
                 if (this.hit("limitLeft")) {
                     console.log('hit');
                     this.attr({
@@ -64,7 +78,7 @@
                     });
                 }
                 if (this.hit("limitRight")) {
-                    console.log(this.x);
+                    console.log(this.color);
                     this.attr({
                         x: 719,
                         y: this.y

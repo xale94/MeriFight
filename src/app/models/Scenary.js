@@ -1,10 +1,9 @@
-function Scenary(scenary) {
-    let _scenary = scenary;
+function Scenary(_scenary) {
     try {
-        this.setPosX(_scenary.posX) || 0;
-        this.setPosY(_scenary.posY) || 0;
-        this.setWidth(_scenary.width);
-        this.setHeight(_scenary.height);
+        this.setPosX(_scenary.posX);
+        this.setPosY(_scenary.posY);
+        this.setWidth(_scenary.width);//bigger than 0
+        this.setHeight(_scenary.height);//bigger than 0
         this.setContext(_scenary.context);
         this.setBackground(_scenary.background);
         if (_scenary.limits)
@@ -14,11 +13,11 @@ function Scenary(scenary) {
     }
 }
 
-Scenary.prototype.setPosX = function (value) {
+Scenary.prototype.setPosX = function (value = 0) {
     this.posX = value;
 };
 
-Scenary.prototype.setPosY = function (value) {
+Scenary.prototype.setPosY = function (value = 0) {
     this.posY = value;
 };
 
