@@ -7,6 +7,12 @@
     <script type="text/javascript" src="node_modules/craftyjs/dist/crafty-min.js"></script>
     <script type="text/javascript" src="src/app/models/Scenary.js">
     </script>
+    <script type="text/javascript" src="src/app/models/Component.js">
+    </script>
+    <script type="text/javascript" src="src/app/models/HealBar.js">
+    </script>
+    <script type="text/javascript" src="src/app/models/Character.js">
+    </script>
     <script>
         let game = new Scenary({
             posX: 0,
@@ -14,7 +20,7 @@
             width: 768,
             height: 220,
             context: "",
-            background: ""
+            background: "#FFFFFF url(src/assets/img/scenary.gif) no-repeat "
         }) //Crafty.init(768, 256, document.getElementById('game'));
         game.start();
         Crafty.e('Floor, 2D, Canvas')
@@ -24,107 +30,61 @@
                 w: 768,
                 h: 10
             });
-        /*let limits = {
-            xStart: 0,
-            xEnd: 768,
-            yStart: 0,
-            yEnd: 220
-        };
-        let limitTop = Crafty.e('LimitTop, 2D, DOM, Collision').attr({
-            x: 0,
-            y: 0,
-            w: 768,
-            h: 1
-        });
-        let limitLeft = Crafty.e('limitLeft, 2D, DOM, Collision').attr({
-            x: 0,
-            y: 0,
-            w: 1,
-            h: 220
-        });
-        let limitRight = Crafty.e('limitRight, 2D, DOM, Collision').attr({
-            x: 768,
-            y: 0,
-            w: 1,
-            h: 220
-        });*/
-        Crafty.background('#FFFFFF url(src/assets/img/scenary.gif) no-repeat ');
-        let Maxheal = Crafty.e('MaxHeal, 2D, DOM, Color').attr({
-            x: 10,
-            y: 10,
-            w: 100,
-            h: 10
-        }).color('black');
-        let Damage = Crafty.e('Damage, 2D, DOM, Color').attr({
-            x: 10,
-            y: 10,
-            w: 96,
-            h: 6
-        }).color('red');
-        let Heal = Crafty.e('Heal, 2D, DOM, Color').attr({
-            x: 10,
-            y: 10,
-            w: 96,
-            h: 6
-        }).color('green');
-
-        let square = Crafty.e('Player, 2D, DOM, Color, Twoway, Gravity, Collision')
-            .attr({
-                x: 100,
-                y: 100,
-                w: 50,
-                h: 50
-            })
-            .color('#F00')
-            .twoway(200, 240)
-            .gravity('Floor')
-            .collision()
-            .bind('Moved', function (from) {
-                console.log(Crafty.timer.FPS());
-                Maxheal.x = this.x - this.w / 2;
-                Maxheal.y = this.y - this.h + 30;
-                Heal.x = Maxheal.x + 2;
-                Heal.y = Maxheal.y + 2;
-                Damage.x = Heal.x;
-                Damage.y = Heal.y;
-                if (this.hit("limitLeft")) {
-                    console.log('hit');
-                    this.attr({
-                        x: 1,
-                        y: this.y
-                    });
-
-                    if ((Heal.w - 5) <= 0) {
-                        Heal.color('rgba (0,0,0,0)');
-                    }
-                    Heal.w = Heal.w - 5;
-                }
-                if (this.hit("limitRight")) {
-                    console.log(this.color);
-                    this.attr({
-                        x: 719,
-                        y: this.y
-                    });
-                }
-                if (this.hit("LimitTop")) {
-                    this.attr({
-                        x: this.x,
-                        y: -1
-                    });
-                }
-            });
-
-        //.
-        //.mbr([0, 0, 768, 0, 768, 220, 0, 220])
         /*
+                let square = Crafty.e('Player, 2D, DOM, Color, Twoway, Gravity, Collision')
+                    .attr({
+                        x: 100,
+                        y: 100,
+                        w: 50,
+                        h: 50
+                    })
+                    .color('#F00')
+                    .twoway(200, 240)
+                    .gravity('Floor')
+                    .collision()
+                    .bind('Moved', function (from) {
+                        console.log(Crafty.timer.FPS());
+                        Maxheal.x = this.x - this.w / 2;
+                        Maxheal.y = this.y - this.h + 30;
+                        Heal.x = Maxheal.x + 2;
+                        Heal.y = Maxheal.y + 2;
+                        Damage.x = Heal.x;
+                        Damage.y = Heal.y;
+                        if (this.hit("limitLeft")) {
+                            console.log('hit');
+                            this.attr({
+                                x: 1,
+                                y: this.y
+                            });
 
-        function stopMovement() {
-            this._speed = 0;
-            if (this._movement) {
-                this.x -= this._movement.x;
-                this.y -= this._movement.y;
-            }
-        }*/
+                            if ((Heal.w - 5) <= 0) {
+                                Heal.color('rgba (0,0,0,0)');
+                            }
+                            Heal.w = Heal.w - 5;
+                        }
+                        if (this.hit("limitRight")) {
+                            console.log(this.color);
+                            this.attr({
+                                x: 719,
+                                y: this.y
+                            });
+                        }
+                        if (this.hit("LimitTop")) {
+                            this.attr({
+                                x: this.x,
+                                y: -1
+                            });
+                        }
+                    });
+        */
+        let ch = new Character({
+            reference:'Player',
+            posX: 100,
+            posY: 100,
+            width: 50,
+            height: 50,
+            color: '#F00',
+        })
         //Crafty.audio.add("sound", "src/assets/sounds/soundtrack/sound.mp3"); 
         //Crafty.audio.play("sound", -1, 1);
     </script>

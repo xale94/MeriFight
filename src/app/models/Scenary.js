@@ -43,19 +43,19 @@ Scenary.prototype.setLimits = function (value) {
 };
 
 Scenary.prototype.createLimits = function () {
-    this.limitTop = Crafty.e('LimitTop, 2D, DOM, Collision').attr({
+    this.limitTop = Crafty.e('LimitTop, 2D, Canvas, Collision').attr({
         x: this.posX,
         y: this.posY,
         w: this.width,
         h: 1
     });
-    this.limitLeft = Crafty.e('limitLeft, 2D, DOM, Collision').attr({
+    this.limitLeft = Crafty.e('limitLeft, 2D, Canvas, Collision').attr({
         x: this.posX,
         y: this.posY,
         w: 1,
         h: this.height
     });
-    this.limitRight = Crafty.e('limitRight, 2D, DOM, Collision').attr({
+    this.limitRight = Crafty.e('limitRight, 2D, Canvas, Collision').attr({
         x: this.posX + this.width, ///¿This.width?
         y: this.posY,
         w: 1,
@@ -64,6 +64,9 @@ Scenary.prototype.createLimits = function () {
 };
 
 Scenary.prototype.start = function () {
-    Crafty.init(this.width, this.height, this.context);
+    this.setContext(Crafty.init(this.width, this.height, this.context));
+    if(this.background){
+        Crafty.background(this.background);
+    }
     this.createLimits();
 };
