@@ -77,14 +77,28 @@
                         }
                     });
         */
+        let assetsObj ={
+            sprites:{
+               "src/assets/img/BalotelliRunning.png":{
+                   tile:44,
+                   tileh:44,
+                   map:{
+                       "balotelliRun":[0,0]
+                   }
+               }
+            }
+        }
+        Crafty.load(assetsObj)
         let ch = new Character({
-            reference:'Player',
+            reference: 'Player',
             posX: 100,
             posY: 100,
-            width: 50,
-            height: 50,
+            width: 44,
+            height: 44,
             color: '#F00',
-        })
+        });
+        
+        
         //Crafty.audio.add("sound", "src/assets/sounds/soundtrack/sound.mp3"); 
         //Crafty.audio.play("sound", -1, 1);
     </script>
