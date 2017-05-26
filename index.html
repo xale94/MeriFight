@@ -30,6 +30,17 @@
                 w: 768,
                 h: 10
             });
+        let assetsObj = {
+            sprites: {
+                "src/assets/img/BalotelliRunning.png": {
+                    tile: 44,
+                    tileh: 44,
+                    map: {
+                        "balotelliRun": [0, 0]
+                    }
+                }
+            }
+        };
         /*
                 let square = Crafty.e('Player, 2D, DOM, Color, Twoway, Gravity, Collision')
                     .attr({
@@ -77,17 +88,7 @@
                         }
                     });
         */
-        let assetsObj ={
-            sprites:{
-               "src/assets/img/BalotelliRunning.png":{
-                   tile:44,
-                   tileh:44,
-                   map:{
-                       "balotelliRun":[0,0]
-                   }
-               }
-            }
-        }
+
         Crafty.load(assetsObj)
         let ch = new Character({
             reference: 'Player',
@@ -97,8 +98,8 @@
             height: 44,
             color: '#F00',
         });
-        
-        
+
+
         //Crafty.audio.add("sound", "src/assets/sounds/soundtrack/sound.mp3"); 
         //Crafty.audio.play("sound", -1, 1);
     </script>

@@ -6,10 +6,10 @@ function Character(_character) {
         this.setDamage(_character.damage);
         this.healBar;
         this.move = {
-            right:false,
-            left:false,
-            up:false,
-            down:false
+            right: false,
+            left: false,
+            up: false,
+            down: false
         };
     } catch (e) {
         throw (e);
@@ -19,7 +19,7 @@ function Character(_character) {
 
 Character.prototype = Object.create(Component.prototype);
 
-Character.prototype.setMaxHealth = function (value) {
+Character.prototype.setMaxHealth = function (value = 100) {
     this.maxHealth = value;
 };
 
@@ -34,6 +34,17 @@ Character.prototype.setDamage = function (value = 0) {
 Character.prototype.kill = function () {
     this.healBar.destroy();
     this.figure.destroy();
+    delete this.healBar;
+};
+
+Character.prototype.receiveDamage = function (damage) {
+    this.damage = this.damage + damage;
+    this.health = ((this.maxHealth - this.damage) * 100) / this.maxHealth;
+    this.healBar.health.w = 96 * this.health / 100; //96 is the initial width of the healbar;
+    if ((96 * this.health / 100) <= 0) {
+        this.healBar.health.color('rgba (0,0,0,0)');
+        this.kill();
+    }
 };
 
 Character.prototype.start = function () {
