@@ -11,6 +11,7 @@ function Character(_character) {
             up: false,
             down: false
         };
+        this.isDead = false;
     } catch (e) {
         throw (e);
     }
@@ -32,8 +33,11 @@ Character.prototype.setDamage = function (value = 0) {
 };
 
 Character.prototype.kill = function () {
-    this.healBar.destroy();
+    this.healBar.maxHealth.destroy();
+    this.healBar.health.destroy();
+    this.healBar.damage.destroy();
     this.figure.destroy();
+    this.isDead = true;
     delete this.healBar;
 };
 
@@ -49,7 +53,8 @@ Character.prototype.receiveDamage = function (damage) {
 
 Character.prototype.start = function () {
     this.healBar = new HealBar(this);
-    this.figure = Crafty.e(this.reference + ', 2D, Canvas' /*, Color,*/ + ', Twoway, Gravity, Collision, balotelliRun, SpriteAnimation')
+    this.isDead = false;
+    this.figure = Crafty.e(this.reference + ', 2D, Canvas' /*, Color,*/ + ', Gravity, Collision, balotelliRun, SpriteAnimation')
         .attr({
             x: 100,
             y: 100,
@@ -57,7 +62,6 @@ Character.prototype.start = function () {
             h: this.height
         })
         /*.color(this.color)*/
-        .twoway(200, 240)
         .gravity('Floor')
         .collision()
         .reel('running', 500, [

@@ -31,11 +31,11 @@ HealBar.prototype.start = function (character) {
 };
 
 //ENTIDAD [representacion, vida]
-//PERSONAJE[habilidades, daño, resistencia...]
-//NPC [inteligencia]
-//BUENO []
-//MALO []
-//ENEMIGO
-//BOSS
-//JUGADOR [id, ]
-//ITEM
+//---PERSONAJE[habilidades, daño, resistencia...] quitar controles
+//------NPC [inteligencia]
+//----------BUENO []
+//----------MALO []
+//-------------ENEMIGO
+//-------------BOSS
+//------JUGADOR [id, ]
+//---ITEM
