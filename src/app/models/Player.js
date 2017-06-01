@@ -7,15 +7,14 @@ Player.prototype = Object.create(Character.prototype);
 Player.prototype.start = function () {
     this.healBar = new HealBar(this);
     this.isDead = false;
-    this.figure = Crafty.e(this.reference + ', 2D, Canvas' /*, Color,*/ + ', Twoway, Gravity, Collision, balotelliRun, SpriteAnimation')
+    this.figure = Crafty.e(this.reference + ', 2D, Canvas, Twoway, Gravity, Collision, balotelliRun, SpriteAnimation')
         .attr({
-            x: 100,
-            y: 100,
+            x: this.posX,
+            y: this.posY,
             w: this.width,
             h: this.height
         })
-        /*.color(this.color)*/
-        .twoway(200, 240)
+        .twoway(this.speed, this.speedJump)
         .gravity('Floor')
         .collision()
         .reel('running', 500, [
@@ -44,6 +43,8 @@ Player.prototype.start = function () {
             if (e.keyCode === Crafty.keys.DA) this.move.down = true;
         })
         .bind('Moved', (from) => {
+            this.posX = this.figure.x;
+            this.posY = this.figure.y;
             this.healBar.maxHealth.x = this.figure.x - this.figure.w / 2;
             this.healBar.maxHealth.y = this.figure.y - this.figure.h + 30;
             this.healBar.health.x = this.healBar.maxHealth.x + 2;
