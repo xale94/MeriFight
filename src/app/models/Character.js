@@ -1,6 +1,8 @@
 function Character(_character) {
     Component.call(this, _character);
     try {
+        this.setSpeed(_character.speed);
+        this.setSpeedJump(_character.speedJump);
         this.setMaxHealth(_character.maxHealth);
         this.setHealth(_character.health); //percentage of maxHealth (0 to 100)
         this.setDamage(_character.damage);
@@ -22,6 +24,16 @@ Character.prototype = Object.create(Component.prototype);
 
 Character.prototype.setMaxHealth = function (value = 100) {
     this.maxHealth = value;
+    //CANNOT BE NEGATIVE
+};
+
+Character.prototype.setSpeed = function (value = 100) {
+    this.speed = value;
+    //CANNOT BE NEGATIVE
+};
+
+Character.prototype.setSpeedJump = function (value = 100) {
+    this.speedJump = value;
     //CANNOT BE NEGATIVE
 };
 
@@ -59,8 +71,8 @@ Character.prototype.start = function () {
     this.isDead = false;
     this.figure = Crafty.e(this.reference + ', 2D, Canvas' /*, Color,*/ + ', Gravity, Collision, balotelliRun, SpriteAnimation')
         .attr({
-            x: 100,
-            y: 100,
+            x: this.posX,
+            y: this.posY,
             w: this.width,
             h: this.height
         })
@@ -93,6 +105,8 @@ Character.prototype.start = function () {
             if (e.keyCode === Crafty.keys.DA) this.move.down = true;
         })
         .bind('Moved', (from) => {
+            this.posX = this.figure.x;
+            this.posY = this.figure.y;
             this.healBar.maxHealth.x = this.figure.x - this.figure.w / 2;
             this.healBar.maxHealth.y = this.figure.y - this.figure.h + 30;
             this.healBar.health.x = this.healBar.maxHealth.x + 2;
@@ -104,14 +118,12 @@ Character.prototype.start = function () {
                     x: 1,
                     y: this.figure.y
                 });
-                this.figure.flip("X");
             }
             if (this.figure.hit("limitRight")) {
                 this.figure.attr({
                     x: 719,
                     y: this.figure.y
                 });
-                this.figure.unflip("X");
             }
             if (this.figure.hit("LimitTop")) {
                 this.figure.attr({
