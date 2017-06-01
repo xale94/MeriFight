@@ -22,14 +22,17 @@ Character.prototype = Object.create(Component.prototype);
 
 Character.prototype.setMaxHealth = function (value = 100) {
     this.maxHealth = value;
+    //CANNOT BE NEGATIVE
 };
 
 Character.prototype.setHealth = function (value = 100) {
     this.health = value;
+    //CANNOT BE NEGATIVE
 };
 
 Character.prototype.setDamage = function (value = 0) {
     this.damage = value;
+    //CANNOT BE NEGATIVE
 };
 
 Character.prototype.kill = function () {
