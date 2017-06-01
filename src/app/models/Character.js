@@ -6,6 +6,7 @@ function Character(_character) {
         this.setMaxHealth(_character.maxHealth);
         this.setHealth(_character.health); //percentage of maxHealth (0 to 100)
         this.setDamage(_character.damage);
+        this.setAnimation(_character.animation);
         this.healBar;
         this.move = {
             right: false,
@@ -64,6 +65,10 @@ Character.prototype.receiveDamage = function (damage) {
         this.healBar.health.color('rgba (0,0,0,0)');
         this.kill();
     }
+};
+
+Character.prototype.setAnimation = function (value) {
+    this.animation = value;
 };
 
 Character.prototype.start = function () {
