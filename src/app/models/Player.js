@@ -7,7 +7,7 @@ Player.prototype = Object.create(Character.prototype);
 Player.prototype.start = function () {
     this.healBar = new HealBar(this);
     this.isDead = false;
-    this.figure = Crafty.e(this.reference + ', 2D, Canvas, Twoway, Gravity, Collision, balotelliRun, SpriteAnimation')
+    this.figure = Crafty.e(this.reference + ', 2D, Canvas, Twoway, Gravity, Collision,' + this.animation + ', SpriteAnimation')
         .attr({
             x: this.posX,
             y: this.posY,
@@ -76,6 +76,10 @@ Player.prototype.start = function () {
             }
             if (this.move.left) {
                 this.figure.flip("X");
+            }
+        }).onHit("PrisaMan", () => {
+            if (this.figure.hit("PrisaMan")) {
+                this.receiveDamage(1);
             }
         });
 };
