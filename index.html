@@ -15,6 +15,14 @@
     </script>
     <script type="text/javascript" src="src/app/models/Player.js">
     </script>
+    <script type="text/javascript" src="src/app/models/Npc.js">
+    </script>
+    <script type="text/javascript" src="src/app/models/GoodNpc.js">
+    </script>
+    <script type="text/javascript" src="src/app/models/EvilNpc.js">
+    </script>
+    <script type="text/javascript" src="src/app/models/Enemy.js">
+    </script>
     <script>
         let game = new Scenary({
             posX: 0,
@@ -39,6 +47,13 @@
                     tileh: 44,
                     map: {
                         "balotelliRun": [0, 0]
+                    }
+                },
+                "src/assets/img/prisaManMoving.png":{
+                    tile:44,
+                    tileh:44,
+                    map:{
+                        "prisaRun":[0,0]
                     }
                 }
             }
@@ -99,58 +114,70 @@
             width: 44,
             height: 44,
             color: '#F00',
-            speed:200,
-            speedJump:240
+            speed: 200,
+            speedJump: 240,
+            animation: "balotelliRun"
+        });
+        let enemy = new Enemy({
+            reference: 'PrisaMan',
+            posX: 400,
+            posY: 100,
+            width: 44,
+            height: 44,
+            color: '#F00',
+            speed: 200,
+            speedJump: 240,
+            animation: "prisaRun"
         });
 
-/*
+        /*
 
-let square = Crafty.e('Enemy, 2D, DOM, Color, Gravity, Collision')
-                    .attr({
-                        x: 100,
-                        y: 100,
-                        w: 50,
-                        h: 50
-                    })
-                    .color('#F00')
-                    .gravity('Floor')
-                    .collision()
-                    .bind('Moved', function (from) {
-                        console.log(Crafty.timer.FPS());
-                        Maxheal.x = this.x - this.w / 2;
-                        Maxheal.y = this.y - this.h + 30;
-                        Heal.x = Maxheal.x + 2;
-                        Heal.y = Maxheal.y + 2;
-                        Damage.x = Heal.x;
-                        Damage.y = Heal.y;
-                        if (this.hit("limitLeft")) {
-                            console.log('hit');
-                            this.attr({
-                                x: 1,
-                                y: this.y
+        let square = Crafty.e('Enemy, 2D, DOM, Color, Gravity, Collision')
+                            .attr({
+                                x: 100,
+                                y: 100,
+                                w: 50,
+                                h: 50
+                            })
+                            .color('#F00')
+                            .gravity('Floor')
+                            .collision()
+                            .bind('Moved', function (from) {
+                                console.log(Crafty.timer.FPS());
+                                Maxheal.x = this.x - this.w / 2;
+                                Maxheal.y = this.y - this.h + 30;
+                                Heal.x = Maxheal.x + 2;
+                                Heal.y = Maxheal.y + 2;
+                                Damage.x = Heal.x;
+                                Damage.y = Heal.y;
+                                if (this.hit("limitLeft")) {
+                                    console.log('hit');
+                                    this.attr({
+                                        x: 1,
+                                        y: this.y
+                                    });
+
+                                    if ((Heal.w - 5) <= 0) {
+                                        Heal.color('rgba (0,0,0,0)');
+                                    }
+                                    Heal.w = Heal.w - 5;
+                                }
+                                if (this.hit("limitRight")) {
+                                    console.log(this.color);
+                                    this.attr({
+                                        x: 719,
+                                        y: this.y
+                                    });
+                                }
+                                if (this.hit("LimitTop")) {
+                                    this.attr({
+                                        x: this.x,
+                                        y: -1
+                                    });
+                                }
                             });
 
-                            if ((Heal.w - 5) <= 0) {
-                                Heal.color('rgba (0,0,0,0)');
-                            }
-                            Heal.w = Heal.w - 5;
-                        }
-                        if (this.hit("limitRight")) {
-                            console.log(this.color);
-                            this.attr({
-                                x: 719,
-                                y: this.y
-                            });
-                        }
-                        if (this.hit("LimitTop")) {
-                            this.attr({
-                                x: this.x,
-                                y: -1
-                            });
-                        }
-                    });
-
-*/
+        */
 
 
 
